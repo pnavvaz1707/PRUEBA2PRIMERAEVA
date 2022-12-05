@@ -5,8 +5,9 @@
     <string name="verduras_txt">Verduras</string>
     <string name="quitar_txt">Quitar</string>
     <string name="anadir_txt">Añadir</string>
-    <string name="nombre_alimento_txt">Nombre del alimento</string>
-    <string name="cantidad_txt">Cantidad</string>
+    <string name="nombre_alimento_txt">Nombre del alimento: </string>
+    <string name="cantidad_txt">Cantidad: </string>
+    <string name="ver_txt">Ver</string>
 
     <string-array name="frigorificos">
         <item>Carnes</item>

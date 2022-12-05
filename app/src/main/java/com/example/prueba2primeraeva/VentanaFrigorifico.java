@@ -1,0 +1,20 @@
+package com.example.prueba2primeraeva;
+
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class VentanaFrigorifico extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.frigorifico_ventana);
+
+        Bundle bundle = getIntent().getExtras();
+
+        Frigorifico frigorificoSel = bundle.getParcelable("frigoSel");
+
+    }
+}

@@ -21,7 +21,11 @@ public class Alimento {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void sumarCantidad(int cantidad) {
+        this.cantidad += cantidad;
+    }
+
+    public void restarCantidad(int cantidad) {
+        this.cantidad -= cantidad;
     }
 }
