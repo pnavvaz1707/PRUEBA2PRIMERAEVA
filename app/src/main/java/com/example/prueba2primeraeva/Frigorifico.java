@@ -8,12 +8,42 @@ import java.util.ArrayList;
 public class Frigorifico implements Parcelable {
     private String nombre;
     private ArrayList<Alimento> alimentos;
-    private final int CANTIDAD_MAXIMA = 10;
+    private int CANTIDAD_MAXIMA = 10;
 
     public Frigorifico(String nombre) {
         this.nombre = nombre;
         this.alimentos = new ArrayList<>();
     }
+
+    protected Frigorifico(Parcel in) {
+        nombre = in.readString();
+        alimentos = in.createTypedArrayList(Alimento.CREATOR);
+        CANTIDAD_MAXIMA = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nombre);
+        dest.writeTypedList(alimentos);
+        dest.writeInt(CANTIDAD_MAXIMA);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Frigorifico> CREATOR = new Creator<Frigorifico>() {
+        @Override
+        public Frigorifico createFromParcel(Parcel in) {
+            return new Frigorifico(in);
+        }
+
+        @Override
+        public Frigorifico[] newArray(int size) {
+            return new Frigorifico[size];
+        }
+    };
 
     public boolean anadirAlimento(Alimento alimento) {
         boolean anadido = false;
@@ -57,15 +87,5 @@ public class Frigorifico implements Parcelable {
 
     public ArrayList<Alimento> getAlimentos() {
         return alimentos;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
     }
 }

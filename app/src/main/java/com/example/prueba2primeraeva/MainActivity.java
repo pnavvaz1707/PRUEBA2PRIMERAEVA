@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.main_window);
 
         rGroupFrigorificos = findViewById(R.id.rGroupFrigorificos);
+        lstFrigorificos = findViewById(R.id.lstFrigorificos);
+
         btnAnadir = findViewById(R.id.btnAnadir);
         btnQuitar = findViewById(R.id.btnQuitar);
         btnVer = findViewById(R.id.btnVer);
@@ -43,18 +45,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nombreAlimento = findViewById(R.id.et_nombre_alimento);
         cantidadAlimento = findViewById(R.id.et_cantidad_alimento);
 
-        frigorificos = new ArrayList<>();
-
         String[] nombreFrigorificos = getResources().getStringArray(R.array.frigorificos);
 
         for (String nombreFrigorifico : nombreFrigorificos) {
             RadioButton frigorifico = new RadioButton(this);
             frigorifico.setText(nombreFrigorifico);
             rGroupFrigorificos.addView(frigorifico);
-            frigorificos.add(new Frigorifico(nombreFrigorifico));
         }
 
-        lstFrigorificos = findViewById(R.id.lstFrigorificos);
+        Bundle bundle;
+        if ((bundle = getIntent().getExtras()) != null) {
+            frigorificos = bundle.getParcelableArrayList("frigorificos");
+            actualizarFrigorificos();
+        } else {
+            frigorificos = new ArrayList<>();
+
+            for (String nombreFrigorifico : nombreFrigorificos) {
+                frigorificos.add(new Frigorifico(nombreFrigorifico));
+            }
+        }
     }
 
     @Override
@@ -73,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bundle bundle = new Bundle();
 
                 bundle.putParcelable("frigoSel", frigorificoSel);
+                bundle.putParcelableArrayList("frigorificos", frigorificos);
                 i.putExtras(bundle);
                 startActivity(i);
 
@@ -91,10 +101,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, "No se ha podido restar " + cantidad + " al alimento " + nombre + " del frigorífico " + frigorificoSel.getNombre(), Toast.LENGTH_SHORT).show();
                         }
                     }
-                    AdaptadorFrigorificos adaptadorFrigorificos = new AdaptadorFrigorificos(this, frigorificos);
-                    lstFrigorificos.setAdapter(adaptadorFrigorificos);
+                    actualizarFrigorificos();
+                } else {
+                    Toast.makeText(this, "Debes rellenar los campos antes de añadir o quitar alimentos", Toast.LENGTH_SHORT).show();
                 }
             }
         }
+    }
+
+    private void actualizarFrigorificos() {
+        AdaptadorFrigorificos adaptadorFrigorificos = new AdaptadorFrigorificos(this, frigorificos);
+        adaptadorFrigorificos.notifyDataSetChanged();
+        lstFrigorificos.setAdapter(adaptadorFrigorificos);
     }
 }

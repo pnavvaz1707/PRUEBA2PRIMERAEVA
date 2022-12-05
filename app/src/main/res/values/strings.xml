@@ -8,6 +8,7 @@
     <string name="nombre_alimento_txt">Nombre del alimento: </string>
     <string name="cantidad_txt">Cantidad: </string>
     <string name="ver_txt">Ver</string>
+    <string name="volver_txt">Volver</string>
 
     <string-array name="frigorificos">
         <item>Carnes</item>
