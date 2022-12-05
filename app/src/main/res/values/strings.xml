@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">PRUEBA2PRIMERAEVA</string>
+    <string name="carnes_txt">Carnes</string>
+    <string name="pescados_txt">Pescados</string>
+    <string name="verduras_txt">Verduras</string>
+    <string name="quitar_txt">Quitar</string>
+    <string name="anadir_txt">Añadir</string>
+    <string name="nombre_alimento_txt">Nombre del alimento</string>
+    <string name="cantidad_txt">Cantidad</string>
+
+    <string-array name="frigorificos">
+        <item>Carnes</item>
+        <item>Pescados</item>
+        <item>Verduras</item>
+    </string-array>
 </resources>
